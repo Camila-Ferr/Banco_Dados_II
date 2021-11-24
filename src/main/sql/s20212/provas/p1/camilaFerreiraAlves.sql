@@ -181,7 +181,7 @@ CREATE FUNCTION rl(pq integer, pg integer, p_bairros varchar[], p_cidades varcha
             FROM aux3
             WHERE (bairro_nome = ANY(p_bairros) OR cidade_nome = ANY(p_cidades))
         )   SELECT array_agg(resposta) INTO rl
-            FROM aux3
+            FROM aux4
             WHERE (pesquisa = pq AND pergunta = pg)
             GROUP BY pesquisa, pergunta;
         RETURN rl;
@@ -218,7 +218,7 @@ CREATE FUNCTION resultado(pesquisa integer, p_bairros varchar[], p_cidades varch
                 respostas = rl(pesquisa, p, p_bairros, p_cidades);
                 IF (respostas IS NOT NULL) THEN
                     FOREACH alternativa IN ARRAY alt(p) LOOP
-                        histo = histo || ARRAY[ ARRAY[alternativa::real, frequencia(alternativa, respostas)] ];
+                        histo = array_cat( histo,ARRAY[ ARRAY[alternativa::real, frequencia(alternativa, respostas)] ]);
                     END LOOP;
                     INSERT INTO relacao VALUES(p, histo);
                     histo = '{}';
