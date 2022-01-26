@@ -42,7 +42,7 @@ INSERT INTO Arena values (2, 'Maracanã', 10000);
 INSERT INTO Arena values (3, 'Vivo Rio', 2000);
 
 
-CREATE OR REPLACE FUNCTION Checar() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION checar() RETURNS TRIGGER AS $$
 declare
 begin
     
