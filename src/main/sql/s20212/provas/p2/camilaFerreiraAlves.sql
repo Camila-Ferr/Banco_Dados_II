@@ -12,7 +12,7 @@ CREATE TABLE Artista(
     nome VARCHAR,
     rua VARCHAR,
     cidade VARCHAR,
-    estado VARCHAR
+    estado VARCHAR,
     cep VARCHAR,
     atividade INT);
 
@@ -26,9 +26,9 @@ CREATE TABLE Concerto(
     id INT,
     artista INT,
     arena INT,
-    preco FLOAT,
     inicio TIMESTAMP,
-    fim TIMESTAMP);
+    fim TIMESTAMP,
+    preco FLOAT);
 
 
 INSERT INTO Atividade values (1, 'vocalista');
@@ -73,7 +73,7 @@ EXECUTE PROCEDURE checar();
 CREATE OR REPLACE FUNCTION criaTemporaria() RETURNS TRIGGER AS $$
 declare
 begin
-    create temporaria table TabelaTemp(id int) on commit drop;
+    create temp table TabelaTemp(id int) on commit drop;
     return null;
 end;
 $$ language plpgsql;
@@ -135,16 +135,16 @@ EXECUTE PROCEDURE checarAt();
 -- UPDATE Artista set atividade = 2 WHERE id = 1;
 
 
--- INSERT INTO Concerto values (1, 1, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:10');
--- INSERT INTO Concerto values (2, 1, 2, '2022-02-10 00:00:00', '2022-02-10 00:00:05');
--- INSERT INTO Concerto values (3, 1, 3, '2022-02-10 00:00:00', '2022-02-10 00:00:30');
+INSERT INTO Concerto values (1, 1, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:10', 1000);
+INSERT INTO Concerto values (2, 1, 2, '2022-02-10 00:00:00', '2022-02-10 00:00:05', 1000);
+-- INSERT INTO Concerto values (3, 1, 3, '2022-02-10 00:00:00', '2022-02-10 00:00:30', 1000);
 
 
--- INSERT INTO Concerto values (1, 1, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:10');
--- INSERT INTO Concerto values (2, 2, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:05');
--- INSERT INTO Concerto values (3, 3, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:30');
+-- INSERT INTO Concerto values (1, 1, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:10', 1000);
+-- INSERT INTO Concerto values (2, 2, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:05', 1000);
+-- INSERT INTO Concerto values (3, 3, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:30', 1000);
 
 
--- INSERT INTO Concerto values (1, 1, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:10');
--- INSERT INTO Concerto values (2, 2, 1, '2022-05-10 00:00:00', '2022-05-10 00:00:05');
--- INSERT INTO Concerto values (3, 3, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:30');
+-- INSERT INTO Concerto values (1, 1, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:10', 1000);
+-- INSERT INTO Concerto values (2, 2, 1, '2022-05-10 00:00:00', '2022-05-10 00:00:05', 1000);
+-- INSERT INTO Concerto values (3, 3, 1, '2022-02-10 00:00:00', '2022-02-10 00:00:30', 1000);
